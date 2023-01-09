@@ -1,0 +1,17 @@
+.flex {
+  display: flex;
+}
+
+.posts_container {
+  flex-direction: column;
+}
+
+.posts__new_post {
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.posts {
+  margin-bottom: 100px;
+  flex-direction: column;
+}

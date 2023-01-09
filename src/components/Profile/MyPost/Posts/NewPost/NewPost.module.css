@@ -1,0 +1,19 @@
+.flex {
+  display: flex;
+}
+
+.container {
+  flex-direction: column;
+}
+
+.field {
+  width: 50%;
+  margin-bottom: 20px;
+}
+
+.button {
+
+  padding: 1em;
+  width: 30%
+;
+}

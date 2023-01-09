@@ -1,0 +1,18 @@
+.flex {
+  display: flex;
+}
+
+.container {
+  width: 1080px;
+  margin: 0 auto;
+}
+
+.header {
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: #4872a3;
+}
+
+.header__logo {
+  width: 160px;
+}

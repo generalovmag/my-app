@@ -1,0 +1,33 @@
+.flex {
+  display: flex;
+}
+
+.profile_page {
+  padding: 20px;
+  flex-direction: column;
+}
+
+.profile {
+  margin-bottom: 30px;
+}
+
+.profile__img {
+  max-width: 300px;
+}
+
+.profile_text {
+  margin-left: 50px;
+  flex-direction: column;
+}
+
+.profile__discription {
+  margin: 10px;
+}
+
+.contacts {
+  flex-direction: column;
+}
+
+.profile__web {
+  margin-top: 10px;
+}

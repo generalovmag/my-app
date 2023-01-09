@@ -1,0 +1,11 @@
+.flex {
+    display: flex;
+}
+
+.dialogs_item NavLink{
+    color: white;
+}
+
+.dialogs_item:not(:first-child) {
+    margin-top: 20px;
+}

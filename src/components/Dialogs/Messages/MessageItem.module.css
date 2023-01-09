@@ -1,0 +1,14 @@
+.flex {
+    display: flex;
+}
+
+.messages_item {
+    padding: 5px;
+    background-color: #fff;
+    border-radius: 5px;
+    width: fit-content;
+}
+
+.messages_item:not(:first-child) {
+    margin-top: 20px;
+}

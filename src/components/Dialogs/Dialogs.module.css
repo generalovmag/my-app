@@ -1,0 +1,59 @@
+.flex {
+    display: flex;
+}
+
+.dialogs {
+    padding: 20px;
+    justify-content: space-between;
+}
+
+.dialogs_list {
+    padding: 20px;
+    width: 20%;
+}
+
+.dialogs_item NavLink{
+    color: white;
+}
+
+.dialogs_item:not(:first-child) {
+    margin-top: 20px;
+}
+
+.messages {
+    width: 75%;
+    flex-direction: column;
+    padding: 20px;
+
+    background-color: aqua;
+}
+
+.messages_item {
+    padding: 5px;
+    background-color: #fff;
+    border-radius: 5px;
+    width: fit-content;
+}
+
+.messages_item:not(:first-child) {
+    margin-top: 20px;
+}
+
+.messages_new {
+    border-top: 2px solid #ffffff;
+    padding-top: 30px;
+    margin-top: 30px;
+    flex-direction: column;
+}
+
+.message_new_text {
+    margin-bottom: 30px;
+}
+
+.message_new_btn {
+    padding: 1em;
+    width: 40%;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}

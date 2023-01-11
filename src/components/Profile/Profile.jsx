@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Profile.module.css";
 import Preloader from "../preloader/preloader";
+import {NavLink} from "react-router-dom";
 
 const Profile = (props) => {
     if (!props.profile) {
@@ -28,34 +29,34 @@ const Profile = (props) => {
                         <span>{props.profile.lookingForAJobDescription}</span>
                     </p>
                     <p className={styles.profile__discription}>Moscow</p>
-                    <p className={styles.profile__discription}>MGUDT'2014</p>
+                    <p className={styles.profile__discription}>MGUDT'2014 </p>
                     <p className={styles.profile__discription}>
                         <b>Обо мне:</b> <br/>
                         <span>{props.profile.aboutMe}</span>
                     </p>
                     <div className={styles.contacts + ' ' + styles.flex}>
                         <h3 className={styles.contacts_title}>Контакты</h3>
-                        <a className={styles.profile__web} src='facebook.com'>
+                        <NavLink className={styles.profile__web} src='facebook.com'>
                             facebook
-                        </a>
-                        <a className={styles.profile__web} src="github.com">
+                        </NavLink>
+                        <NavLink className={styles.profile__web} src="github.com">
                             github
-                        </a>
-                        <a className={styles.profile__web} src="instagra.com/sds">
+                        </NavLink>
+                        <NavLink className={styles.profile__web} src="instagra.com/sds">
                             instagram
-                        </a>
-                        <a className={styles.profile__web} src="https://twitter.com/@sdf">
+                        </NavLink>
+                        <NavLink className={styles.profile__web} src="https://twitter.com/@sdf">
                             twitter
-                        </a>
-                        <a className={styles.profile__web} src="vk.com/dimych">
+                        </NavLink>
+                        <NavLink className={styles.profile__web} src="vk.com/dimych">
                             vk
-                        </a>
-                        <a className={styles.profile__web} src="#">
+                        </NavLink>
+                        <NavLink className={styles.profile__web} src="#">
                             youtube
-                        </a>
-                        <a className={styles.profile__web} src="#">
+                        </NavLink>
+                        <NavLink className={styles.profile__web} src="#">
                             main site
-                        </a>
+                        </NavLink>
                     </div>
                 </div>
             </div>

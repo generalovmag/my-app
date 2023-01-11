@@ -7,6 +7,11 @@
   margin: 0 auto;
 }
 
+.header_container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .header {
   padding: 10px;
   margin-bottom: 20px;
@@ -15,4 +20,13 @@
 
 .header__logo {
   width: 160px;
+}
+
+.auth {
+
+}
+
+.login {
+  padding: 1em;
+
 }

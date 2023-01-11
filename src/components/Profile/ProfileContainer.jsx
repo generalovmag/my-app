@@ -6,6 +6,28 @@ import {connect} from "react-redux";
 import axios from "axios";
 import {setUserProfile} from "../../redux/profilePageReducer";
 import {useLocation, useNavigate, useParams} from 'react-router-dom'
+import {profileAPI} from "../../api/api";
+
+class ProfileContainer extends React.Component {
+    componentDidMount() {
+        let userId = this.props.router.params.userID
+        if (!userId) {
+            userId = 27388
+        }
+        profileAPI.setUserProfile(userId).then(data => {
+            this.props.setUserProfile(data)
+        })
+    }
+
+    render() {
+        return (
+            <div className={m.profile_page + ' ' + m.flex}>
+                <Profile {...this.props}/>
+                <MyPostContainer/>
+            </div>
+        );
+    }
+};
 
 export function withRouter(Component) {
     function ComponentWithRouterProp(props) {
@@ -22,28 +44,6 @@ export function withRouter(Component) {
 
     return ComponentWithRouterProp;
 }
-
-class ProfileContainer extends React.Component {
-    componentDidMount() {
-        let userID = this.props.router.params.userID
-        if (!userID) {
-            userID = 2
-        }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userID)
-            .then(response => {
-                this.props.setUserProfile(response.data)
-            })
-    }
-
-    render() {
-        return (
-            <div className={m.profile_page + ' ' + m.flex}>
-                <Profile {...this.props}/>
-                <MyPostContainer/>
-            </div>
-        );
-    }
-};
 
 let mapStateToProps = (state) => {
     return {

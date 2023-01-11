@@ -10,8 +10,8 @@ let Users = (props) => {
         pages.push(i)
     }
     let curP = props.currentPage;
-    let curPF = ((curP - 10) < 0) ? 0 : curP - 10;
-    let curPL = curP + 10;
+    let curPF = ((curP - 5) < 0) ? 0 : curP - 5;
+    let curPL = curP + 5;
     let slicedPages = pages.slice(curPF, curPL);
 
 
@@ -36,12 +36,13 @@ let Users = (props) => {
                             <img src={u.photos.small !== null ? u.photos.small : userPhoto} alt="Изображение проиля"
                                  className={styles.img}/>
                         </NavLink>
+
                         {u.followed
                             ? <button className={styles.button} onClick={() => {
-                                props.follow(u.id)
+                                props.unfollow(u.id)
                             }}>Удалить из друзей</button>
                             : <button className={styles.button} onClick={() => {
-                                props.unfollow(u.id)
+                                props.follow(u.id)
                             }}>Добавить в друзья</button>
                         }
                     </div>

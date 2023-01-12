@@ -2,42 +2,26 @@ import React from 'react';
 import {connect} from "react-redux";
 import Users from "./Users";
 import {
-    follow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching, unfollow
+    getUsersThunk,
+    userFollowThunk,
+    userUnfollowThunk
 } from "../../redux/usersReducer";
 import Preloader from "../preloader/preloader";
-import {followedAPI, usersAPI} from "../../api/api";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(data.items)
-            this.props.setTotalUsersCount(data.totalCount)
-        })
+        this.props.getUsersThunk( this.props.currentPage, this.props.pageSize )
     }
 
     onPageChanged = (page) => {
-        this.props.setCurrentPage(page)
-        this.props.toggleIsFetching(true)
-        usersAPI.onPageChanged(page, this.props.pageSize).then(data => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(data.items)
-        })
+        this.props.getUsersThunk( page, this.props.pageSize )
     }
     userFollow = (id) => {
-        followedAPI.follow(id).then(data => {
-            if (data.resultCode === 0) {
-                this.props.follow(id)
-            }
-        })
+        this.props.userFollowThunk(id)
+
     }
     userUnfollow = (id) => {
-        followedAPI.unfollow(id).then(data => {
-            if (data.resultCode === 0) {
-                this.props.unfollow(id)
-            }
-        })
+        this.props.userUnfollowThunk(id)
     }
 
     render() {
@@ -67,10 +51,7 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    follow,
-    unfollow,
-    setUsers,
-    setTotalUsersCount,
-    setCurrentPage,
-    toggleIsFetching
+    userUnfollowThunk,
+    userFollowThunk,
+    getUsersThunk
 })(UsersContainer)

@@ -3,20 +3,12 @@ import m from "./Profile.module.css";
 import MyPostContainer from "./MyPost/MyPostContainer";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import axios from "axios";
-import {setUserProfile} from "../../redux/profilePageReducer";
+import { setUserProfileThunk} from "../../redux/profilePageReducer";
 import {useLocation, useNavigate, useParams} from 'react-router-dom'
-import {profileAPI} from "../../api/api";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
-        let userId = this.props.router.params.userID
-        if (!userId) {
-            userId = 27388
-        }
-        profileAPI.setUserProfile(userId).then(data => {
-            this.props.setUserProfile(data)
-        })
+        this.props.setUserProfileThunk(this.props.router.params.userID)
     }
 
     render() {
@@ -53,4 +45,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {setUserProfile})(withRouter(ProfileContainer));
+export default connect(mapStateToProps, {setUserProfileThunk})(withRouter(ProfileContainer));

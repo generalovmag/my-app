@@ -9,11 +9,10 @@ let Users = (props) => {
     for (let i = 1; i <= countPages; i++) {
         pages.push(i)
     }
-    let curP = props.currentPage;
-    let curPF = ((curP - 5) < 0) ? 0 : curP - 5;
-    let curPL = curP + 5;
-    let slicedPages = pages.slice(curPF, curPL);
-
+    let curP = props.currentPage
+    let curPF = ((curP - 5) < 0) ? 0 : curP - 5
+    let curPL = curP + 5
+    let slicedPages = pages.slice(curPF, curPL)
 
     return <div>
         <div className={`${styles.pagination_container} ${styles.flex}`}>
@@ -38,11 +37,15 @@ let Users = (props) => {
                         </NavLink>
 
                         {u.followed
-                            ? <button className={styles.button} onClick={() => {
+                            ? <button className={styles.button} onClick={(event) => {
+                                event.target.disabled = true
                                 props.unfollow(u.id)
+                                event.target.disabled = false
                             }}>Удалить из друзей</button>
-                            : <button className={styles.button} onClick={() => {
+                            : <button className={styles.button} onClick={(event) => {
+                                event.target.disabled = true
                                 props.follow(u.id)
+                                event.target.disabled = false
                             }}>Добавить в друзья</button>
                         }
                     </div>

@@ -3,46 +3,55 @@ import m from "./Profile.module.css";
 import MyPostContainer from "./MyPost/MyPostContainer";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import { setUserProfileThunk} from "../../redux/profilePageReducer";
-import {useLocation, useNavigate, useParams} from 'react-router-dom'
+import {getUserProfileThunk, getUserStatusThunk, updateUserStatusThunk} from "../../redux/profilePageReducer";
+import {compose} from "redux";
+import {AuthNavigate} from "../../hoc/withAuthNavigate";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
-        this.props.setUserProfileThunk(this.props.router.params.userID)
+        let userId = window.location.pathname.slice(9)
+        if (!userId) {
+            userId = this.props.userID
+            // if (!userId) {
+            //     this.props.history.push('/login')
+            // }
+        }
+        this.props.getUserProfileThunk(userId)
+        this.props.getUserStatusThunk(userId)
+    }
+
+    updateUserStatus = (status) => {
+        this.props.updateUserStatusThunk(status)
     }
 
     render() {
         return (
             <div className={m.profile_page + ' ' + m.flex}>
-                <Profile {...this.props}/>
+                <Profile
+                    profile={this.props.profile}
+                    status={this.props.status}
+                    updateUserStatus={this.updateUserStatus}
+                />
                 <MyPostContainer/>
             </div>
         );
     }
 };
 
-export function withRouter(Component) {
-    function ComponentWithRouterProp(props) {
-        let location = useLocation();
-        let navigate = useNavigate();
-        let params = useParams();
-        return (
-            <Component
-                {...props}
-                router={{location, navigate, params}}
-            />
-        );
-    }
-
-    return ComponentWithRouterProp;
-}
-
 let mapStateToProps = (state) => {
     return {
         posts: state.profilePageReducer.posts,
-        newPostText: state.profilePageReducer.newPostText,
-        profile: state.profilePageReducer.profile
+        profile: state.profilePageReducer.profile,
+        status: state.profilePageReducer.status,
+        userID: state.authReducer.id
     }
 }
 
-export default connect(mapStateToProps, {setUserProfileThunk})(withRouter(ProfileContainer));
+export default compose(
+    connect(mapStateToProps, {
+        getUserProfileThunk,
+        getUserStatusThunk,
+        updateUserStatusThunk
+    }),
+    AuthNavigate
+)(ProfileContainer)

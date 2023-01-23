@@ -7,14 +7,16 @@ import {
     userUnfollowThunk
 } from "../../redux/usersReducer";
 import Preloader from "../preloader/preloader";
+import {compose} from "redux";
+import {AuthNavigate} from "../../hoc/withAuthNavigate";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.getUsersThunk( this.props.currentPage, this.props.pageSize )
+        this.props.getUsersThunk(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (page) => {
-        this.props.getUsersThunk( page, this.props.pageSize )
+        this.props.getUsersThunk(page, this.props.pageSize)
     }
     userFollow = (id) => {
         this.props.userFollowThunk(id)
@@ -50,8 +52,12 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {
-    userUnfollowThunk,
-    userFollowThunk,
-    getUsersThunk
-})(UsersContainer)
+export default compose(
+    connect(mapStateToProps, {
+        userUnfollowThunk,
+        userFollowThunk,
+        getUsersThunk
+    }),
+    AuthNavigate
+)
+(UsersContainer)

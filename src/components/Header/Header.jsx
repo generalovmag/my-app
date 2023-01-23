@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Header.module.css";
 import {NavLink} from "react-router-dom";
+import {logoutUserThunk} from "../../redux/authReducer";
 
 const Header = (props) => {
     return (
@@ -15,7 +16,12 @@ const Header = (props) => {
                         </svg>
                     </a>
                     <div className={styles.auth}>
-                        { props.isAuthUser ? <NavLink to={'/personalRoom'} >{props.login}</NavLink>
+                        { props.isAuthUser ?
+                            <div>
+                                <NavLink to={'/personalRoom'} >{props.email}</NavLink>
+                                <br/>
+                                <button className={styles.logout_btn} onClick={props.logoutUserThunk}>Выйти</button>
+                            </div>
                         : <NavLink to={'/login'} className={styles.login}>Авторизация</NavLink>
                         }
                     </div>

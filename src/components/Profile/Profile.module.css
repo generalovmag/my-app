@@ -31,3 +31,13 @@
 .profile__web {
   margin-top: 10px;
 }
+
+.status_container {
+  padding: 10px;
+}
+
+.status {
+  padding: 10px;
+  cursor: pointer;
+
+}

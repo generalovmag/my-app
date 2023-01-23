@@ -37,17 +37,35 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-    setUserProfile(id) {
+    getUserProfile(id) {
         return instance.get(`profile/` + id)
             .then(response => {
                 return response.data
             })
+    },
+    getUserStatus(id) {
+        return instance.get(`/profile/status/` + id)
+    },
+    updateUserStatus(status) {
+        return instance.put(`/profile/status`, {status})
     }
 }
 
 export const authAPI = {
     me() {
         return instance.get(`auth/me`)
+            .then(response => {
+                return response.data
+            })
+    },
+    login({email, password, rememberMe = false, captcha = false}) {
+        return instance.post(`auth/login`, {email, password, rememberMe, captcha})
+            .then(response => {
+                return response.data
+            })
+    },
+    logout() {
+        return instance.delete(`auth/login`)
             .then(response => {
                 return response.data
             })

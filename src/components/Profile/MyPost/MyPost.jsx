@@ -1,17 +1,14 @@
 import React from "react";
-import NewPost from "./Posts/NewPost/NewPost";
+import NewPostForm from "./Posts/NewPost/NewPostForm";
 import Posts from "./Posts/Posts/Posts";
-import m from "./MyPost.module.css";
+import styles from "./MyPost.module.css";
 
 const MyPost = (props) => {
     return (
-        <div className={`${m.posts_container} ${m.flex}`}>
-            <h2 className={m.posts__title}>My post</h2>
-            <div className={`${m.posts__new_post} ${m.flex}`}>
-                <NewPost textNewPost={props.textNewPost}
-                         addPost={props.addPostActionCreator}
-                         updateText={props.updateTextNewPostActionCreator}
-                />
+        <div className={`${styles.posts_container} ${styles.flex}`}>
+            <h2 className={styles.posts__title}>My post</h2>
+            <div className={`${styles.posts__new_post} ${styles.flex}`}>
+                <NewPostForm addPost={props.addPostActionCreator}/>
             </div>
             <Posts posts={props.posts}/>
         </div>

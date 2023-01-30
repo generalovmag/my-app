@@ -66,10 +66,10 @@ export const setTotalUsersCount = (users) => ({type: SET_USERS_COUNT, totalCount
 export const setCurrentPage = (page) => ({type: SET_CURRENT_PAGE, currentPage: page})
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
 
-export const getUsersThunk = (numberPage, pageSize) => (dispatch) => {
-    dispatch(setCurrentPage(numberPage))
+export const getUsersThunk = (page, pageSize) => (dispatch) => {
+    dispatch(setCurrentPage(page))
     dispatch(toggleIsFetching(true))
-    usersAPI.getUsers(numberPage, pageSize).then(data => {
+    usersAPI.getUsers(page, pageSize).then(data => {
         dispatch(toggleIsFetching(false))
         dispatch(setUsers(data.items))
         dispatch(setTotalUsersCount(data.totalCount))

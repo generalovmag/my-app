@@ -9,6 +9,13 @@ import {
 import Preloader from "../preloader/preloader";
 import {compose} from "redux";
 import {AuthNavigate} from "../../hoc/withAuthNavigate";
+import {
+    getCurrentPage,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers, selectorGetUsers
+} from "../../redux/selectors/usersSelectors";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
@@ -44,11 +51,11 @@ class UsersContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: state.usersReducer.users,
-        currentPage: state.usersReducer.currentPage,
-        totalUsersCount: state.usersReducer.totalUsersCount,
-        pageSize: state.usersReducer.pageSize,
-        isFetching: state.usersReducer.isFetching
+        users: selectorGetUsers(state),
+        currentPage: getCurrentPage(state),
+        totalUsersCount: getTotalUsersCount(state),
+        pageSize: getPageSize(state),
+        isFetching: getIsFetching(state)
     }
 }
 

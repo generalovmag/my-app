@@ -1,7 +1,8 @@
 import {authAPI} from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA',
-    LOGOUT_USER='LOGOUT_USER'
+    LOGOUT_USER = 'LOGOUT_USER'
+
 
 let initialState = {
     id: null,
@@ -17,7 +18,7 @@ const authUserReducer = (state = initialState, action) => {
                 ...state,
                 ...action.payload
             }
-            case LOGOUT_USER:
+        case LOGOUT_USER:
             return {
                 ...state,
                 id: null,
@@ -30,7 +31,10 @@ const authUserReducer = (state = initialState, action) => {
     }
 }
 
-export const authSetUserData = ({userId, email, login, isAuthUser}) => ({type: SET_USER_DATA, payload: {userId, email, login, isAuthUser}})
+export const authSetUserData = ({userId, email, login, isAuthUser}) => ({
+    type: SET_USER_DATA,
+    payload: {userId, email, login, isAuthUser}
+})
 export const authSetUserLogout = () => ({type: LOGOUT_USER})
 
 export const authSetUserDataThunk = () => (dispatch) => {
@@ -64,6 +68,5 @@ export const logoutUserThunk = () => (dispatch) => {
         }
     })
 }
-
 
 export default authUserReducer

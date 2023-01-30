@@ -12,9 +12,6 @@ class ProfileContainer extends React.Component {
         let userId = window.location.pathname.slice(9)
         if (!userId) {
             userId = this.props.userID
-            // if (!userId) {
-            //     this.props.history.push('/login')
-            // }
         }
         this.props.getUserProfileThunk(userId)
         this.props.getUserStatusThunk(userId)

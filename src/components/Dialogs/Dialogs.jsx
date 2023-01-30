@@ -39,7 +39,6 @@ class NewMessageForm extends React.Component {
         this.setState({
             newMessageText: ''
         })
-        console.log(this.state.newMessageText)
     }
 
     render() {

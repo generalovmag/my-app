@@ -3,7 +3,7 @@ import m from "./Posts.module.css";
 import PostItem from "./PostItem";
 
 const Posts = (props) => {
-  let posts = props.posts;
+  let posts = [...props.posts].reverse();
   let postsElements = posts.map(el => <PostItem text={el.text} key={el.id} likeCount={el.likeCount} /> )
 
   return (

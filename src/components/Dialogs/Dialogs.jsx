@@ -42,13 +42,12 @@ class NewMessageForm extends React.Component {
     }
 
     render() {
-        let newMessageText = this.props.newMessageText
         return (
             <div className={`${m.messages_new} ${m.flex}`}>
                     <textarea name="" id="" cols="20" rows="4"
                               className={m.message_new_text}
                               onChange={this.handleNewMessage}
-                              value={this.newMessageText}/>
+                              value={this.state.newMessageText}/>
                 <button onClick={this.sendMessage} className={m.message_new_btn}>Send message</button>
             </div>
         )

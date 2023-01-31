@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {getUserProfileThunk, getUserStatusThunk, updateUserStatusThunk} from "../../redux/profilePageReducer";
 import {compose} from "redux";
 import {AuthNavigate} from "../../hoc/withAuthNavigate";
+import ProfileWithHooks from "./ProfileWithHooks";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -24,7 +25,7 @@ class ProfileContainer extends React.Component {
     render() {
         return (
             <div className={m.profile_page + ' ' + m.flex}>
-                <Profile
+                <ProfileWithHooks
                     profile={this.props.profile}
                     status={this.props.status}
                     updateUserStatus={this.updateUserStatus}

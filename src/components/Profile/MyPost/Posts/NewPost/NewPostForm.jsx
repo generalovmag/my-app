@@ -20,15 +20,13 @@ class NewPostForm extends React.Component {
     }
 
     render() {
-        let {newPostText} = this.state.newPostText
-
         return (
             <div className={`${styles.container} ${styles.flex}`}>
                 <textarea name="" id="" cols="20" rows="5"
                           className={styles.field}
                           onChange={this.updateText}
-                          value={newPostText}/>
-                <button onClick={this.addPost} className={styles.button}>Add post</button>
+                          value={this.state.newPostText}/>
+                <button onClick={this.addPost} className={styles.button}>Добавить пост</button>
             </div>
         )
     }

@@ -1,11 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Users from "./Users";
-import {
-    getUsersThunk,
-    userFollowThunk,
-    userUnfollowThunk
-} from "../../redux/usersReducer";
+import {getUsersThunk, userFollowThunk, userUnfollowThunk} from "../../redux/usersReducer";
 import Preloader from "../preloader/preloader";
 import {compose} from "redux";
 import {AuthNavigate} from "../../hoc/withAuthNavigate";
@@ -14,34 +10,39 @@ import {
     getIsFetching,
     getPageSize,
     getTotalUsersCount,
-    getUsers, selectorGetUsers
+    selectorGetUsers
 } from "../../redux/selectors/usersSelectors";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.getUsersThunk(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize, getUsersThunk} = this.props
+        getUsersThunk(currentPage, pageSize)
     }
 
     onPageChanged = (page) => {
-        this.props.getUsersThunk(page, this.props.pageSize)
+        const {pageSize, getUsersThunk} = this.props
+        getUsersThunk(page, pageSize)
     }
     userFollow = (id) => {
-        this.props.userFollowThunk(id)
+        const {userFollowThunk} = this.props
+        userFollowThunk(id)
 
     }
     userUnfollow = (id) => {
-        this.props.userUnfollowThunk(id)
+        const {userUnfollowThunk} = this.props
+        userUnfollowThunk(id)
     }
 
     render() {
+        const {isFetching, totalUsersCount, pageSize, currentPage, users} = this.props
         return <>
-            {this.props.isFetching ? <Preloader/> : null}
+            {isFetching ? <Preloader/> : null}
             <Users
-                totalUsersCount={this.props.totalUsersCount}
-                pageSize={this.props.pageSize}
-                currentPage={this.props.currentPage}
+                totalUsersCount={totalUsersCount}
+                pageSize={pageSize}
+                currentPage={currentPage}
                 onPageChanged={this.onPageChanged}
-                users={this.props.users}
+                users={users}
                 follow={this.userFollow}
                 unfollow={this.userUnfollow}
             />

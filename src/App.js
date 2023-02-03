@@ -25,45 +25,45 @@ class App extends React.Component {
     }
 
     render() {
+
         if (!this.props.initialization) {
-            return <Preloader />
+            return <Preloader/>
         }
         return (
-
-                <div className="app-wrapper flex">
-                    <HeaderContainer/>
-                    <div className="container flex">
-                        <Navigation/>
-                        <div className="container_content">
-                            <div className="main">
-                                <Routes>
-                                    <Route path='/profile/:userID?'
-                                           element={<ProfileContainer/>}/>
-                                    <Route path='/news/*'
-                                           element={<News/>}/>
-                                    <Route path='/dialogItem/*'
-                                           element={<DialogsContainer/>}/>
-                                    <Route path='/users/*'
-                                           element={<UsersContainer/>}/>
-                                    <Route path='/groups/*'
-                                           element={<Groups/>}/>
-                                    <Route path='/photo/*'
-                                           element={<Photo/>}/>
-                                    <Route path='/music'
-                                           element={<Music/>}/>
-                                    <Route path='/settings'
-                                           element={<Settings/>}/>
-                                    <Route path='/login'
-                                           element={<LoginPage/>}/>
-                                </Routes>
-                            </div>
+            <div className="app-wrapper flex">
+                <HeaderContainer/>
+                <div className="container flex">
+                    <Navigation/>
+                    <div className="container_content">
+                        <div className="main">
+                            <Routes>
+                                <Route path='/profile/:userID?'
+                                       element={<ProfileContainer/>}/>
+                                <Route path='/news/*'
+                                       element={<News/>}/>
+                                <Route path='/dialogItem/*'
+                                       element={<DialogsContainer/>}/>
+                                <Route path='/users/*'
+                                       element={<UsersContainer/>}/>
+                                <Route path='/groups/*'
+                                       element={<Groups/>}/>
+                                <Route path='/photo/*'
+                                       element={<Photo/>}/>
+                                <Route path='/music'
+                                       element={<Music/>}/>
+                                <Route path='/settings'
+                                       element={<Settings/>}/>
+                                <Route path='/login'
+                                       element={<LoginPage/>}/>
+                            </Routes>
                         </div>
                     </div>
                 </div>
-
+            </div>
         )
     }
 }
+
 
 let mapStateToProps = (state) => {
     return {
@@ -71,7 +71,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default compose (
+export default compose(
     withRouter,
     connect(mapStateToProps, {initializationApp})
 )(App);

@@ -1,7 +1,7 @@
 import {authAPI} from "../api/api";
 
-const SET_USER_DATA = 'SET_USER_DATA',
-    LOGOUT_USER = 'LOGOUT_USER'
+const SET_USER_DATA = 'authReducer/SET_USER_DATA',
+        LOGOUT_USER = 'authReducer/LOGOUT_USER'
 
 
 let initialState = {
@@ -37,36 +37,33 @@ export const authSetUserData = ({userId, email, login, isAuthUser}) => ({
 })
 export const authSetUserLogout = () => ({type: LOGOUT_USER})
 
-export const authSetUserDataThunk = () => (dispatch) => {
-    authAPI.me().then(data => {
-        if (data.resultCode === 0) {
-            let {id, email, login} = data.data
+export const authSetUserDataThunk = () => async (dispatch) => {
+    let response = await authAPI.me()
+    if (response.resultCode === 0) {
+        let {id, email, login} = response.data
+        let isAuthUser = true
+        dispatch(authSetUserData({id, email, login, isAuthUser}))
+    }
+
+}
+export const authSetLoginUserThunk = ({email, password, rememberMe, captcha}) => async (dispatch) => {
+    let response = await authAPI.login({email, password, rememberMe, captcha})
+    if (response.resultCode === 0) {
+        let responseDown = await authAPI.me()
+        if (responseDown.resultCode === 0) {
+            let {id, email, login} = responseDown.data
             let isAuthUser = true
             dispatch(authSetUserData({id, email, login, isAuthUser}))
         }
-    })
-}
-export const authSetLoginUserThunk = ({email, password, rememberMe, captcha}) => (dispatch) => {
-    authAPI.login({email, password, rememberMe, captcha}).then(data => {
-        if (data.resultCode === 0) {
-            let id = data.id
-            authAPI.me().then(data => {
-                if (data.resultCode === 0) {
-                    let {id, email, login} = data.data
-                    let isAuthUser = true
-                    dispatch(authSetUserData({id, email, login, isAuthUser}))
-                }
-            })
-        }
-    })
+    }
 }
 
-export const logoutUserThunk = () => (dispatch) => {
-    authAPI.logout().then(data => {
-        if (data.resultCode === 0) {
-            dispatch(authSetUserLogout())
-        }
-    })
+export const logoutUserThunk = () => async (dispatch) => {
+    let response = await authAPI.logout()
+    if (response.resultCode === 0) {
+        dispatch(authSetUserLogout())
+    }
+
 }
 
 export default authUserReducer

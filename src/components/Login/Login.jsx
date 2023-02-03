@@ -5,8 +5,9 @@ import * as yup from "yup";
 import {authSetLoginUserThunk} from "../../redux/authReducer";
 import {connect} from "react-redux";
 import {Navigate} from "react-router-dom";
+import {createField} from "../../assets/assetsForm";
 
-const LoginFormik = (props) => {
+const LoginFormik = ({pushLogin}) => {
     const validationForm = yup.object().shape({
         email: yup.string().email('Введите корректный email').required('Обязательно для заполнения'),
         password: yup.string().required('Обязательно для заполнения')
@@ -21,7 +22,7 @@ const LoginFormik = (props) => {
             }}
             validateOnBlur
             onSubmit={(values) => {
-                props.pushLogin(values)
+                pushLogin(values)
             }}
             validationSchema={validationForm}
         >
@@ -33,26 +34,12 @@ const LoginFormik = (props) => {
                 <Form className={styles.form_login}>
                     <div className={styles.row}>
                         <label htmlFor={'email'}>Email</label><br/>
-                        <Field
-                            className={styles.input}
-                            type={'text'}
-                            name={'email'}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.email}
-                        />
+                        {createField(styles.input, 'text', 'email', handleChange, handleBlur, values.email)}
                     </div>
                     {touched.login && errors.login && <p className={styles.error}>{errors.login}</p>}
                     <div className={styles.row}>
                         <label htmlFor={'password'}>Пароль</label><br/>
-                        <Field
-                            className={styles.input}
-                            type={'password'}
-                            name={'password'}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.password}
-                        />
+                        {createField(styles.input, 'password', 'password', handleChange, handleBlur, values.password)}
                     </div>
                     {touched.password && errors.password && <p className={styles.error}>{errors.password}</p>}
                     <div className={styles.row}>
@@ -81,15 +68,14 @@ const LoginFormik = (props) => {
     )
 }
 
-const Login = (props) => {
+const Login = ({isAuthUser, authSetLoginUserThunk}) => {
     const pushLogin = (values) => {
-        console.log(values)
         let {email, password, rememberMe = true, captcha = false} = values
-        props.authSetLoginUserThunk({email, password, rememberMe, captcha})
+        authSetLoginUserThunk({email, password, rememberMe, captcha})
     }
 
-    if (props.isAuthUser) {
-        return <Navigate to={'/profile'} />
+    if (isAuthUser) {
+        return <Navigate to={'/profile'}/>
     }
 
     return (
@@ -107,4 +93,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect (mapStateToProps, {authSetLoginUserThunk})(Login);
+export default connect(mapStateToProps, {authSetLoginUserThunk})(Login);

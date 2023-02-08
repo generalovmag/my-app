@@ -1,16 +1,17 @@
 {
   "files": {
-    "main.css": "/react_it_incubator/static/css/main.373af39c.css",
-    "main.js": "/react_it_incubator/static/js/main.5807e8fc.js",
+    "main.css": "/react_it_incubator/static/css/main.e72d78c7.css",
+    "main.js": "/react_it_incubator/static/js/main.2de550f3.js",
     "static/js/787.28cb0dcd.chunk.js": "/react_it_incubator/static/js/787.28cb0dcd.chunk.js",
+    "static/media/profile_user_photo.jpg": "/react_it_incubator/static/media/profile_user_photo.1b6843e08e080dc46610.jpg",
     "static/media/preloader.svg": "/react_it_incubator/static/media/preloader.7e66d6d71e20745b96942233b1bc114d.svg",
     "index.html": "/react_it_incubator/index.html",
-    "main.373af39c.css.map": "/react_it_incubator/static/css/main.373af39c.css.map",
-    "main.5807e8fc.js.map": "/react_it_incubator/static/js/main.5807e8fc.js.map",
+    "main.e72d78c7.css.map": "/react_it_incubator/static/css/main.e72d78c7.css.map",
+    "main.2de550f3.js.map": "/react_it_incubator/static/js/main.2de550f3.js.map",
     "787.28cb0dcd.chunk.js.map": "/react_it_incubator/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.373af39c.css",
-    "static/js/main.5807e8fc.js"
+    "static/css/main.e72d78c7.css",
+    "static/js/main.2de550f3.js"
   ]
 }

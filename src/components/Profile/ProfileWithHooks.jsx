@@ -2,28 +2,9 @@ import React, {useEffect, useState} from "react";
 import styles from "./Profile.module.css";
 import Preloader from "../preloader/preloader";
 import {NavLink} from "react-router-dom";
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileWithHooks = (props) => {
-    let [editMode, setEditMode] = useState(false)
-    let [status, setStatus] = useState(props.status)
-
-    useEffect(() => {
-        setStatus(props.status)
-    }, [props.status])
-
-    const handleSubmitStatus = (event) => {
-        setStatus(event.target.value)
-    }
-
-    const activateEditModeToggle = () => {
-        setEditMode(true)
-    }
-
-    const deactivateEditModeToggle = () => {
-        props.updateUserStatus(status)
-        setEditMode(false)
-    }
-
     if (!props.profile) {
         return <Preloader/>
     }
@@ -39,24 +20,7 @@ const ProfileWithHooks = (props) => {
                 </div>
                 <div className={`${styles.profile_text} ${styles.flex}`}>
                     <h2 className={styles.profile__discription}>{props.profile.fullName}</h2>
-                    <div className={styles.status_container}>
-                        <p>Статус:</p>
-                        {!editMode ? <div>
-                                <span
-                                    onClick={activateEditModeToggle}
-                                    className={styles.status}>{
-                                    status
-                                }</span>
-                            </div>
-                            : <div>
-                                <input type="text"
-                                       onChange={handleSubmitStatus}
-                                       autoFocus={true}
-                                       onBlur={deactivateEditModeToggle}
-                                       value={status} className={styles.status_input}/>
-                            </div>
-                        }
-                    </div>
+                    <ProfileStatus {...props}/>
                     <p className={styles.profile__discription}>24 november</p>
                     <p className={styles.profile__discription}>
                         <b>Статус поиска работы:</b> <br/>

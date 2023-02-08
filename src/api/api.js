@@ -15,12 +15,6 @@ export const usersAPI = {
             return response.data
         })
     },
-    onPageChanged(page, pageSize = 10) {
-        return instance.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${pageSize}`)
-            .then(response => {
-                return response.data
-            })
-    },
     follow(id) {
         return instance.post(`follow/${id}`)
             .then(response => {

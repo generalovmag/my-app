@@ -23,8 +23,9 @@
 
 .button {
     padding: 1em;
+    margin: 0 20px;
     border: none;
-    border-right: 10px;
+    border-radius: 5px;
     cursor: pointer;
     background-color: #4872a3;
     color: white;
@@ -46,6 +47,7 @@
 
 .pagination_container {
    justify-content: center;
+    padding: 20px 0;
 }
 
 .page_number {

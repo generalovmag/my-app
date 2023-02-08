@@ -1,6 +1,6 @@
 import React from "react";
 import './App.css';
-import {Route, Routes} from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
@@ -14,9 +14,10 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/Login";
 import {compose} from "redux";
 import {withRouter} from "./assets/withRouter";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import Preloader from "./components/preloader/preloader";
 import {initializationApp} from "./redux/appReducer";
+import store from "./redux/redux-store";
 
 class App extends React.Component {
 
@@ -25,7 +26,6 @@ class App extends React.Component {
     }
 
     render() {
-
         if (!this.props.initialization) {
             return <Preloader/>
         }
@@ -71,7 +71,17 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default compose(
+let AppContainer = compose(
     withRouter,
     connect(mapStateToProps, {initializationApp})
 )(App);
+
+const MySocialApp = (props) => {
+    return <Router>
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>
+    </Router>
+}
+
+export default MySocialApp

@@ -2,13 +2,11 @@ import React from 'react';
 import Pagination from "../../assets/pagination/Pagination";
 import User from "./User";
 
-let Users = ({totalUsersCount, pageSize, currentPage, users, unfollow, follow, onPageChanged }) => {
+let Users = ({totalUsersCount, users, unfollow, follow, onPageChanged }) => {
     return <div>
         <Pagination
-            totalUsersCount={totalUsersCount}
-            pageSize={pageSize}
-            currentPage={currentPage}
-            onPageChanged={onPageChanged}
+            totalItemsCount={totalUsersCount}
+            getPage={onPageChanged}
         />
         {
             users.map(u => <User

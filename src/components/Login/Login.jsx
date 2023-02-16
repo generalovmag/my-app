@@ -36,7 +36,7 @@ const LoginFormik = ({pushLogin}) => {
                         <label htmlFor={'email'}>Email</label><br/>
                         {createField(styles.input, 'text', 'email', handleChange, handleBlur, values.email)}
                     </div>
-                    {touched.login && errors.login && <p className={styles.error}>{errors.login}</p>}
+                    {touched.email && errors.email && <p className={styles.error}>{errors.email}</p>}
                     <div className={styles.row}>
                         <label htmlFor={'password'}>Пароль</label><br/>
                         {createField(styles.input, 'password', 'password', handleChange, handleBlur, values.password)}

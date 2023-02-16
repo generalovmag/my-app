@@ -2,12 +2,12 @@ import React from "react";
 import m from'./Navigation.module.css'
 import {NavLink} from "react-router-dom";
 
-const Navigation = () => {
+const Navigation = (props) => {
   return (
     <nav className={m.nav}>
       <ul className={`${m.list} ${m.flex}`}>
         <li className={m.item}>
-          <NavLink to='/profile' className={navData => navData.isActive? `${m.link} ${m.active}`: m.link}>
+          <NavLink to={'/profile/'} className={navData => navData.isActive? `${m.link} ${m.active}`: m.link}>
             Моя старница</NavLink>
         </li>
         <li className={m.item}>

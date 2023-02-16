@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './users.module.css'
-import userPhoto from '../../assets/img/17879520.png'
 import {NavLink} from "react-router-dom";
+import userPhoto from '../../assets/img/profile_user_photo.jpg'
 
 let User = ({user, unfollow, follow}) => {
     let u = user

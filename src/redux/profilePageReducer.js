@@ -2,7 +2,8 @@ import {profileAPI} from "../api/api";
 
 const ADD_NEW_POST = 'ADD-NEW-POST',
     SET_USER_PROFILE = 'SET_USER_PROFILE',
-    SET_USER_STATUS = 'SET_USER_STATUS'
+    SET_USER_STATUS = 'SET_USER_STATUS',
+    SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS'
 
 let initialState = {
     posts: [
@@ -36,6 +37,11 @@ const profilePageReducer = (state = initialState, action) => {
                 ...state,
                 status: action.status
             }
+        case SAVE_PHOTO_SUCCESS:
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.photos}
+            }
         default:
             return state
     }
@@ -46,21 +52,14 @@ const profilePageReducer = (state = initialState, action) => {
 export const addPostActionCreator = (newPostText) => ({type: ADD_NEW_POST, newPostText})
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 export const setUserStatus = (status) => ({type: SET_USER_STATUS, status})
+export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos})
 
-export const getUserProfileThunk = (userID) => async (dispatch) => {
-    let userId = userID
-    if (!userId) {
-        userId = 27388
-    }
+export const getUserProfileThunk = (userId) => async (dispatch) => {
     let response = await profileAPI.getUserProfile(userId)
     dispatch(setUserProfile(response))
 
 }
-export const getUserStatusThunk = (userID) => async (dispatch) => {
-    let userId = userID
-    if (!userId) {
-        userId = 27388
-    }
+export const getUserStatusThunk = (userId) => async (dispatch) => {
     let response = await profileAPI.getUserStatus(userId)
     dispatch(setUserStatus(response.data))
 
@@ -70,7 +69,19 @@ export const updateUserStatusThunk = (status) => async (dispatch) => {
     if (response.data.resultCode === 0) {
         dispatch(setUserStatus(status))
     }
-
+}
+export const savePhoto = (file) => async (dispatch) => {
+    let response = await profileAPI.savePhoto(file)
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos))
+    }
+}
+export const saveProfile = (profile) => async (dispatch) => {
+    let response = await profileAPI.saveProfile(profile)
+    if (response.data.resultCode === 0) {
+        let response = await profileAPI.getUserProfile(profile.userId)
+        dispatch(setUserProfile(response))
+    }
 }
 
 export default profilePageReducer

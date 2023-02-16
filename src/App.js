@@ -1,6 +1,6 @@
 import React from "react";
 import './App.css';
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {HashRouter as Router, Route, Routes} from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
@@ -49,11 +49,11 @@ class App extends React.Component {
                                        element={<Groups/>}/>
                                 <Route path='/photo/*'
                                        element={<Photo/>}/>
-                                <Route path='/music'
+                                <Route path='/music/*'
                                        element={<Music/>}/>
-                                <Route path='/settings'
+                                <Route path='/settings/'
                                        element={<Settings/>}/>
-                                <Route path='/login'
+                                <Route path='/login/*'
                                        element={<LoginPage/>}/>
                             </Routes>
                         </div>
@@ -73,8 +73,7 @@ let mapStateToProps = (state) => {
 
 let AppContainer = compose(
     withRouter,
-    connect(mapStateToProps, {initializationApp})
-)(App);
+    connect(mapStateToProps, {initializationApp}))(App);
 
 const MySocialApp = (props) => {
     return <Router>
